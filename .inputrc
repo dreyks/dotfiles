@@ -1,0 +1,14 @@
+set completion-ignore-case on
+
+## arrow up
+"\e[A":history-search-backward
+## arrow down
+"\e[B":history-search-forward
+
+## only tab once on symlinked directories
+set mark-symlinked-directories on
+
+set meta-flag on
+set convert-meta off
+set output-meta on
+set input-meta on

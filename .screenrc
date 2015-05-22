@@ -1,0 +1,36 @@
+startup_message off
+caption always 
+caption string " %` %{Rk} %c %{+b Bk}%-w%{+b r.}%n* %t%{-b B.}%+w%<"
+#substitute the backtick above
+backtick 0 0 0 sh -c  'screen -ls | grep -oP "(?<=$PPID\.)[^\s]*"'
+# backtick 0 30 30 sh -c 'screen -ls | grep --color=no -o "$PPID[^[:space:]]*"'
+
+#treat the shell as a login shell
+shell -$SHELL
+deflogin off
+
+#screen title
+#termcapinfo * ti@:te@
+
+# vbell settings
+vbell on
+vbell_msg "Vbell on %n" 
+bell_msg "Bell on %n"
+
+# activity monitor settings
+defmonitor on
+activity "Activity on %n" 
+
+# detach session on disconnect
+autodetach on
+
+# clearing the screen after vi, man etc
+altscreen on
+
+term "screen-256color"
+
+#attrcolor b ".I"    # allow bold colors - necessary for some reason
+#termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'   # tell screen how to set colors. AB = background, AF=foreground
+#defbce on    # use current bg color for erased chars
+
+defscrollback 5000
