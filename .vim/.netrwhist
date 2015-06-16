@@ -1,5 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/mnt/HD/HD_a2/ffp/start'
-let g:netrw_dirhist_2='/mnt/HD/HD_a2/ffp/home/root/.vim'
-let g:netrw_dirhist_3='/opt/var/transmission'
