@@ -136,7 +136,7 @@ function bash_prompt()
   fi
 
 
-  export PS1="$COLOR_GREEN[$USERCOLOR\u$COLOR_GREEN@\h:$my_pwd]$gbranch$COLOR_RESET$LAST "
+  export PS1="$COLOR_GREEN[$USERCOLOR\u$COLOR_GREEN@\h$COLOR_RESET${debian_chroot:+$debian_chroot}$COLOR_GREEN:$my_pwd]$gbranch$COLOR_RESET$LAST "
 
 }
 PROMPT_COMMAND=bash_prompt
@@ -158,7 +158,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -lahF'
 alias la='ls -A'
 alias l='ls -CF'
 
