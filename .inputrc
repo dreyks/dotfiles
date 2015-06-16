@@ -1,3 +1,5 @@
+set blink-matching-paren on
+
 set completion-ignore-case on
 
 ## arrow up
