@@ -52,11 +52,12 @@ filetype on
 filetype plugin on
 filetype plugin indent on
 
-
+" matching 'end' keywords
+runtime macros/matchit.vim
 
 
 " General settings
-color ir_black
+color ir_black_256
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -146,6 +147,22 @@ let NERDTreeIgnore=[]
 
 imap <F5> <ESC>:buffers<CR>:buffer<Space>
 nmap <F5> :buffers<CR>:buffer<Space>
+
+" s-tab to activate last used buffer
+imap  <ESC>:e #<CR>
+nmap  :e #<CR>
+
+nmap <tab><right> :bn<CR>
+" numpad +
+imap k <ESC>:bn<CR>
+nmap k :bn<CR>
+
+nmap <tab><left> :bp<CR>
+" numpad -
+imap m <ESC>:bp<CR>
+nmap m :bp<CR>
+
+" close current buffer
 imap <C-q> <ESC>:bd<CR>
 nmap <C-q> :bd<CR>
 :set hidden
