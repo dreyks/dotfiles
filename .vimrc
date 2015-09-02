@@ -1,6 +1,5 @@
 "Use Vim settings, rather then Vi settings (much better!).
 set nocompatible
-language en_US
 
 
 
