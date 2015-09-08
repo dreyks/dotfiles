@@ -72,6 +72,7 @@ set number
 set title
 
 set noshowmode " airline does this
+"let g:airline_powerline_fonts = 1
 
 ""status bar always visible
 "set laststatus=2
@@ -147,21 +148,48 @@ let NERDTreeIgnore=[]
 imap <F5> <ESC>:buffers<CR>:buffer<Space>
 nmap <F5> :buffers<CR>:buffer<Space>
 
-" s-tab to activate last used buffer
-imap  <ESC>:e #<CR>
-nmap  :e #<CR>
-
 nmap <tab><right> :bn<CR>
 " numpad +
-imap k <ESC>:bn<CR>
-nmap k :bn<CR>
+imap Ol <ESC>:bn<CR>
+nmap Ol :bn<CR>
+imap Ok <ESC>:bn<CR>
+nmap Ok :bn<CR>
 
 nmap <tab><left> :bp<CR>
 " numpad -
-imap m <ESC>:bp<CR>
-nmap m :bp<CR>
+imap OS <ESC>:bp<CR>
+nmap OS :bp<CR>
+imap Om <ESC>:bp<CR>
+nmap Om :bp<CR>
 
 " close current buffer
 imap <C-q> <ESC>:bd<CR>
 nmap <C-q> :bd<CR>
 :set hidden
+
+" Save current view settings on a per-window, per-buffer basis.
+function! AutoSaveWinView()
+    if !exists("w:SavedBufView")
+        let w:SavedBufView = {}
+    endif
+    let w:SavedBufView[bufnr("%")] = winsaveview()
+endfunction
+
+" Restore current view settings.
+function! AutoRestoreWinView()
+    let buf = bufnr("%")
+    if exists("w:SavedBufView") && has_key(w:SavedBufView, buf)
+        let v = winsaveview()
+        let atStartOfFile = v.lnum == 1 && v.col == 0
+        if atStartOfFile && !&diff
+            call winrestview(w:SavedBufView[buf])
+        endif
+        unlet w:SavedBufView[buf]
+    endif
+endfunction
+
+" When switching buffers, preserve window view.
+if v:version >= 700
+    autocmd BufLeave * call AutoSaveWinView()
+    autocmd BufEnter * call AutoRestoreWinView()
+endif
