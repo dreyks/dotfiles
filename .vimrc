@@ -25,9 +25,10 @@ Plugin 'dreyks/ir_black'              " ir_black color scheme
 Plugin 'bling/vim-airline'            " Lean & mean status/tabline for vim
 "Plugin 'fisadev/FixedTaskList.vim'    " Pending tasks list
 "Plugin 'rosenfeld/conque-term'        " Consoles as buffers
-Plugin 'tpope/vim-surround'           " Parentheses, brackets, quotes, XML tags, and more
+"Plugin 'tpope/vim-surround'           " Parentheses, brackets, quotes, XML tags, and more
 
 " --- Ruby/Rails ---
+Plugin 'tpope/vim-endwise'            " Autoinserting 'end'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'              " Ultimate rails plugin
 Plugin 'tpope/vim-bundler'            " Bundle plugin
@@ -71,25 +72,6 @@ syntax on
 set number
 set title
 
-set noshowmode " airline does this
-"let g:airline_powerline_fonts = 1
-
-""status bar always visible
-"set laststatus=2
-"" Set status line
-"set statusline=%F       "tail of the filename
-""set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
-""set statusline+=%{&ff}] "file format
-""set statusline+=%h      "help file flag
-"set statusline+=%m      "modified flag
-"set statusline+=%r      "read only flag
-"set statusline+=%y      "filetype
-"set statusline+=%=      "left/right separator
-"set statusline+=%c,     "cursor column
-"set statusline+=%l/%L   "cursor line/total lines
-"set statusline+=\ %P    "percent through file
-
-
 
 "tab for 2 spaces
 set shiftwidth=2
@@ -131,6 +113,7 @@ endif
 "let g:snippets_dir = "~/.vim/vim-snippets/snippets"
 
 " Vim-Airline
+set noshowmode " airline takes care of mode
 set laststatus=2
 let g:airline_theme='bubblegum'
 "let g:airline_powerline_fonts = 1
