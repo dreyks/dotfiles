@@ -122,7 +122,7 @@ if has("autocmd")
     \| exe "normal! g`\"" | endif
 endif
 
-if has("multi_byte")
+if has("multy_byte") && $LANG !~ '\v\cutf-?8$'
   set encoding=utf-8
 endif
 
