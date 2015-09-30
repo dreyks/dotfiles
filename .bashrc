@@ -189,3 +189,4 @@ if ! shopt -oq posix; then
 fi
 
 export LANG="en_US.UTF8"
+export EDITOR='vim'

@@ -22,7 +22,9 @@ Plugin 'majutsushi/tagbar'            " Class/module browser
 Plugin 'dreyks/ir_black'              " ir_black color scheme
 
 "------------------=== Other ===----------------------
-Plugin 'bling/vim-airline'            " Lean & mean status/tabline for vim
+Plugin 'bling/vim-airline'             " Lean & mean status/tabline for vim
+Plugin 'Raimondi/delimitMate'          " automatically closes quotes
+Plugin 'henrik/vim-indexed-search'     " 'Match x of y' when searching
 "Plugin 'fisadev/FixedTaskList.vim'    " Pending tasks list
 "Plugin 'rosenfeld/conque-term'        " Consoles as buffers
 "Plugin 'tpope/vim-surround'           " Parentheses, brackets, quotes, XML tags, and more
@@ -55,23 +57,21 @@ filetype plugin indent on
 " matching 'end' keywords
 runtime macros/matchit.vim
 
-
 " General settings
 color ir_black_256
 
 " Set to auto read when a file is changed from the outside
 set autoread
 
-" back to xterm title on vim exit
-"set title
-"set titleold=""
-"set titlestring=VIM:\ %F
+" Intuitive backspacing in insert mode
+set backspace=indent,eol,start
 
-set backspace=2
 syntax on
 set number
 set title
 
+set hidden
+set wildmode=list:longest
 
 "tab for 2 spaces
 set shiftwidth=2
@@ -83,9 +83,16 @@ filetype indent on
 set si "Smart indent
 set wrap "Wrap lines
 
+" ================ Scrolling ========================
+set scrolloff=8         "Start scrolling when we're 8 lines away from margins
+set sidescrolloff=15
+set sidescroll=1
 
-set incsearch   "find the next match as we type the search
-"set hlsearch    "highlight searches by default
+" ================ Search ===========================
+set incsearch       " Find the next match as we type the search
+set hlsearch        " Highlight searches by default
+set ignorecase      " Ignore case when searching...
+set smartcase       " ...unless we type a capital
 
 " Show matching brackets when text indicator is over them
 set showmatch
@@ -108,10 +115,6 @@ if has("multy_byte") && $LANG !~ '\v\cutf-?8$'
   set encoding=utf-8
 endif
 
-
-" Snipmate
-"let g:snippets_dir = "~/.vim/vim-snippets/snippets"
-
 " Vim-Airline
 set noshowmode " airline takes care of mode
 set laststatus=2
@@ -128,6 +131,7 @@ let g:tagbar_autofocus = 0 " autofocus on open
 map <silent> <F3> :NERDTreeToggle<CR>
 let NERDTreeIgnore=[]
 
+" Buffers
 imap <F5> <ESC>:buffers<CR>:buffer<Space>
 nmap <F5> :buffers<CR>:buffer<Space>
 
@@ -148,7 +152,10 @@ nmap Om :bp<CR>
 " close current buffer
 imap <C-q> <ESC>:bd<CR>
 nmap <C-q> :bd<CR>
-:set hidden
+
+" scroll faster
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
 
 " Save current view settings on a per-window, per-buffer basis.
 function! AutoSaveWinView()
@@ -170,6 +177,14 @@ function! AutoRestoreWinView()
         unlet w:SavedBufView[buf]
     endif
 endfunction
+
+" ================ Persistent Undo ==================
+" Keep undo history across sessions, by storing in file.
+if has('persistent_undo') && !isdirectory(expand('~').'/.vim/backups')
+  silent !mkdir ~/.vim/backups > /dev/null 2>&1
+  set undodir=~/.vim/backups
+  set undofile
+endif
 
 " When switching buffers, preserve window view.
 if v:version >= 700
