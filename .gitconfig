@@ -43,7 +43,7 @@
   r = remote -v                     # show remotes (verbose)
 
   # status
-  s = status                        # status
+  s = status -s                     # status
 
 [push]
   # 'git push' will push the current branch to its tracking branch
@@ -55,3 +55,6 @@
   # instead of a/b/c/d as prefixes for patches
   mnemonicprefix = true
   algorithm = patience
+[user]
+	name = Dreyk
+	email = dreyk@i.ua
