@@ -1,3 +1,5 @@
+[core]
+  excludesfile = ~/.gitignore
 [alias]
   # add
   a = add                           # add
@@ -56,5 +58,5 @@
   mnemonicprefix = true
   algorithm = patience
 [user]
-	name = Dreyk
-	email = dreyk@i.ua
+  name = Roman Usherenko
+  email = roman.usherenko@gmail.com
