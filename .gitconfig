@@ -1,6 +1,9 @@
 [core]
   excludesfile = ~/.gitignore
 [alias]
+  # list all aliases
+  aliases = config --get-regexp alias
+
   # add
   a = add                           # add
 
