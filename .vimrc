@@ -33,7 +33,7 @@ Plugin 'henrik/vim-indexed-search'     " 'Match x of y' when searching
 Plugin 'tpope/vim-endwise'            " Autoinserting 'end'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'              " Ultimate rails plugin
-Plugin 'tpope/vim-bundler'            " Bundle plugin
+" Plugin 'tpope/vim-bundler'            " Bundle plugin
 Plugin 'ain/vim-capistrano'           " *.cap support
 
 "--------------=== Snippets support ===---------------
