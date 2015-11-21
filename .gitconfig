@@ -1,5 +1,6 @@
 [core]
   excludesfile = ~/.gitignore
+  editor = vi
 [alias]
   # list all aliases
   aliases = config --get-regexp alias
