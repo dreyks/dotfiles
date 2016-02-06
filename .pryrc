@@ -36,7 +36,7 @@ begin
   # If you want awesome_print without automatic pagination, use the line below
   # Pry.config.print = proc { |output, value| output.puts value.ai }
 rescue LoadError => err
-  puts "gem install awesome_print  # <-- highly recommended"
+  # puts "gem install awesome_print  # <-- highly recommended"
 end
 
 default_command_set = Pry::CommandSet.new do
