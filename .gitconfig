@@ -1,6 +1,3 @@
-[core]
-  excludesfile = ~/.gitignore
-  editor = vi
 [alias]
   # list all aliases
   aliases = config --get-regexp alias
@@ -51,16 +48,26 @@
   # status
   s = status -s                     # status
 
-[push]
-  # 'git push' will push the current branch to its tracking branch
-  # the usual default is to push all branches
-  default = upstream
+[core]
+  excludesfile = ~/.gitignore
+  editor = vi
 
 [diff]
   # Git diff will use (i)ndex, (w)ork tree, (c)ommit and (o)bject
   # instead of a/b/c/d as prefixes for patches
   mnemonicprefix = true
   algorithm = patience
+
+[push]
+  # 'git push' will push the current branch to its tracking branch
+  # the usual default is to push all branches
+  default = upstream
+
+[rebase]
+  # stashes all the changes befoe performing a rebase, then applies
+  # it back after rebase is finished
+  autostash = true
+
 [user]
   name = Roman Usherenko
   email = roman.usherenko@gmail.com
