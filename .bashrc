@@ -116,8 +116,8 @@ function bash_prompt()
   tmp+=$trunc
   #my_pwd=$(rev_str $tmp)
   my_pwd=`echo $tmp | rev`
-  COLOR_GREEN="\[\e[1;32m\]"
-  COLOR_RED="\[\e[1;31m\]"
+  COLOR_GREEN="\[\e[0;32m\]"
+  COLOR_RED="\[\e[0;31m\]"
   COLOR_RESET="\[\e[m\]"
   if [ $(/usr/bin/id -u) -eq 0 ]; then
     LAST='#'
