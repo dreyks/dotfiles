@@ -23,6 +23,7 @@ Plugin 'dreyks/ir_black'              " ir_black color scheme
 
 "------------------=== Other ===----------------------
 Plugin 'bling/vim-airline'             " Lean & mean status/tabline for vim
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Raimondi/delimitMate'          " automatically closes quotes
 Plugin 'henrik/vim-indexed-search'     " 'Match x of y' when searching
 "Plugin 'fisadev/FixedTaskList.vim'    " Pending tasks list
