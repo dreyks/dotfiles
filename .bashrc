@@ -81,12 +81,16 @@ function git_branch()
   fi
 
   git_branch=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
+  untracked=''
   if git diff --no-ext-diff --quiet 2>/dev/null; then
     git_color="$c_git_clean"
   else
     git_color="$c_git_dirty"
   fi
-  echo "$git_color$git_branch"
+  if git status -s | grep '??' > /dev/null; then
+    untracked="$c_git_dirty*"
+  fi
+  echo "$git_color$git_branch$untracked"
 }
 
 function bash_prompt()
