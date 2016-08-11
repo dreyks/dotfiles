@@ -19,36 +19,26 @@ Plugin 'gmarik/Vundle.vim'            " let Vundle manage Vundle, required
 Plugin 'scrooloose/nerdtree'          " Project and file navigation
 Plugin 'majutsushi/tagbar'            " Class/module browser
 
+" --- UI ---
 Plugin 'dreyks/ir_black'              " ir_black color scheme
-
-"------------------=== Other ===----------------------
-Plugin 'bling/vim-airline'             " Lean & mean status/tabline for vim
+Plugin 'bling/vim-airline'            " Lean & mean status/tabline for vim
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'Raimondi/delimitMate'          " automatically closes quotes
-Plugin 'henrik/vim-indexed-search'     " 'Match x of y' when searching
-"Plugin 'fisadev/FixedTaskList.vim'    " Pending tasks list
-"Plugin 'rosenfeld/conque-term'        " Consoles as buffers
-"Plugin 'tpope/vim-surround'           " Parentheses, brackets, quotes, XML tags, and more
 
 " --- Ruby/Rails ---
-Plugin 'tpope/vim-endwise'            " Autoinserting 'end'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'              " Ultimate rails plugin
+Plugin 'tpope/vim-endwise'            " Autoinserting 'end'
 " Plugin 'tpope/vim-bundler'            " Bundle plugin
 Plugin 'ain/vim-capistrano'           " *.cap support
 
-"--------------=== Snippets support ===---------------
-"Plugin 'garbas/vim-snipmate'          " Snippets manager
-"Plugin 'MarcWeber/vim-addon-mw-utils' " dependencies #1
-"Plugin 'tomtom/tlib_vim'              " dependencies #2
-"Plugin 'honza/vim-snippets'           " snippets repo
+" --- Crystal ---
+Plugin 'rhysd/vim-crystal'
 
-"---------------=== Languages support ===-------------
-" --- Python ---
-"Plugin 'klen/python-mode'            " Python mode (docs, refactor, lints, highlighting, run and ipdb and more)
-"Plugin 'davidhalter/jedi-vim'        " Jedi-vim autocomplete plugin
-"Plugin 'mitsuhiko/vim-jinja'         " Jinja support for vim
-"Plugin 'mitsuhiko/vim-python-combined'  " Combined Python 2/3 for Vim
+"------------------=== Other ===----------------------
+Plugin 'Raimondi/delimitMate'          " automatically closes quotes
+Plugin 'henrik/vim-indexed-search'     " 'Match x of y' when searching
+"Plugin 'tpope/vim-surround'           " Parentheses, brackets, quotes, XML tags, and more
+
 
 call vundle#end()               " required
 filetype on
