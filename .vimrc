@@ -31,6 +31,10 @@ Plugin 'tpope/vim-endwise'            " Autoinserting 'end'
 " Plugin 'tpope/vim-bundler'            " Bundle plugin
 Plugin 'ain/vim-capistrano'           " *.cap support
 
+" --- JS ---
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+
 " --- Crystal ---
 Plugin 'rhysd/vim-crystal'
 
@@ -182,3 +186,14 @@ if v:version >= 700
     autocmd BufLeave * call AutoSaveWinView()
     autocmd BufEnter * call AutoRestoreWinView()
 endif
+
+
+
+
+
+
+" new
+
+" when pasting copy pasted text back to 
+" buffer instead replacing with owerride
+xnoremap p pgvy
