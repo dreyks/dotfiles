@@ -1,9 +1,5 @@
-"Use Vim settings, rather then Vi settings (much better!).
-set nocompatible
-
-
-
-
+set nocompatible                      " improved mode, required
+filetype on                           " required for compatibility with Mac OS X, See issue #167
 filetype off                          " required
 
 "=====================================================
