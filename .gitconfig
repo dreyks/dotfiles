@@ -30,6 +30,9 @@
   d = diff                          # diff unstaged changes
   dc = diff --cached                # diff staged changes
 
+  # fetch
+  fe = fetch -p                     # remote local branches that where removed remotely
+
   # log
   l = log --graph --date=short
   changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
