@@ -8,6 +8,8 @@ case $- in
       *) return;;
 esac
 
+platform="$(uname | tr '[:upper:]' '[:lower:]')"
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -35,43 +37,6 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
 function git_branch()
 {
   c_git_clean="\[\e[0;33m\]"
@@ -81,7 +46,6 @@ function git_branch()
   fi
 
   git_branch=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
-  untracked=''
   if git diff --no-ext-diff --quiet 2>/dev/null; then
     git_color="$c_git_clean"
   else
@@ -89,6 +53,8 @@ function git_branch()
   fi
   if git status -s | grep '??' > /dev/null; then
     untracked="$c_git_dirty*"
+  else
+    untracked=''
   fi
   echo "$git_color$git_branch$untracked"
 }
@@ -98,8 +64,6 @@ function bash_prompt()
   local tmp=''
   local trunc=''
   my_pwd=`echo ${PWD/#$HOME/\~} | rev`
-  #my_pwd=$(rev_str `echo ${PWD/#$HOME/\~}`)
-  IFS='/'
   my_pwd=($my_pwd)
   unset IFS
   for (( i=0,cnt=${#my_pwd[@]}; i<cnt; i++ ))
@@ -118,8 +82,6 @@ function bash_prompt()
 
   done
   tmp+=$trunc
-  #my_pwd=$(rev_str $tmp)
-  my_pwd=`echo $tmp | rev`
   COLOR_GREEN="\[\e[0;32m\]"
   COLOR_RED="\[\e[0;31m\]"
   COLOR_RESET="\[\e[m\]"
@@ -130,24 +92,18 @@ function bash_prompt()
     LAST='\$'
     USERCOLOR=$COLOR_GREEN
   fi
-  #gbranch=''
-  #gbranch="$(__git_ps1)"
   gbranch=$(git_branch)
   if [ "$gbranch" != "" ]; then
-    #gbranch="${gbranch/ \(/\[}"
-    #gbranch="${gbranch/\)/\]}"
     gbranch="[$gbranch$COLOR_GREEN]"
   fi
 
-
   export PS1="$COLOR_GREEN[$USERCOLOR\u$COLOR_GREEN@\h$COLOR_RESET${debian_chroot:+$debian_chroot}$COLOR_GREEN:$my_pwd]$gbranch$COLOR_RESET$LAST "
-
 }
 PROMPT_COMMAND=bash_prompt
 
+# do not react to  ^S and ^Q
 stty stop undef
 stty start undef
-
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -160,13 +116,16 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-
-# some more ls aliases
-alias ll='ls -lahF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# alias gs='git status -s'
+# -a do not ignore entries starting with .
+# -h print human readable sizes
+# -F append indicator (one of */=>@|) to entries
+# -f do not sort: needed for MacOS to sort case-insensitively, turns off -ls for *nix so use it only for darwin platform
+# -l use a long listing format
+ll_keys='lahF'
+if [[ $platform == 'darwin' ]]; then
+  ll_keys+='f' 
+fi
+alias ll="ls -$ll_keys"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -176,7 +135,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
