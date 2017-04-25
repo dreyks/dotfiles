@@ -60,6 +60,7 @@ set backspace=indent,eol,start
 syntax on
 set number
 set title
+set titleold=
 
 set hidden
 set wildmode=list:longest
