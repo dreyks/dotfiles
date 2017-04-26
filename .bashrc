@@ -64,6 +64,7 @@ function bash_prompt()
   local tmp=''
   local trunc=''
   my_pwd=`echo ${PWD/#$HOME/\~} | rev`
+  IFS='/'
   my_pwd=($my_pwd)
   unset IFS
   for (( i=0,cnt=${#my_pwd[@]}; i<cnt; i++ ))
@@ -82,6 +83,7 @@ function bash_prompt()
 
   done
   tmp+=$trunc
+  my_pwd=`echo $tmp | rev`
   COLOR_GREEN="\[\e[0;32m\]"
   COLOR_RED="\[\e[0;31m\]"
   COLOR_RESET="\[\e[m\]"
