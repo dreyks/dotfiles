@@ -42,7 +42,7 @@
   shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
 
   # pull
-  pl = pull                         # pull
+  pl = pull --ff-only               # pull; do not try to merge, fail if fast-forward is not possible
 
   # push
   ps = push                         # push
