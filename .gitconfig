@@ -11,6 +11,7 @@
 
   # branch
   b = branch -v                     # branch (verbose)
+  prune-gone = !git b -vv | grep gone | awk '{print $1}' | xargs git b -d # remove local orphan branches
 
   # commit
   c = commit -m                     # commit with message
