@@ -6,6 +6,10 @@ set completion-ignore-case on
 "\e[A":history-search-backward
 ## arrow down
 "\e[B":history-search-forward
+## alt+right
+"\e\e[D":backward-word 
+## alt+left
+"\e\e[C":forward-word 
 
 ## only tab once on symlinked directories
 set mark-symlinked-directories on
