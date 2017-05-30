@@ -32,6 +32,15 @@ shopt -s globstar
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+# --ignore-case or -i: Cause search in less to ignore case unless an uppercase letter is present in the search pattern.
+# --status-column or -J: Display a status column on the left to indicate lines that match current search or indicate the first unread line after moving a full page.
+# --LONG-PROMPT or -M: Prompt more verbosely.
+# --RAW-CONTROL-CHARS or -R: Cause ANSI “color” escape sequences to be displayed in their raw form. This is for the color display explained later in the next section.
+# --HILITE-UNREAD or -W: Highlight the first unread line after scrolling the screen for more than one lines.
+# --tabs=2 or -x4: Display a tab as 2-character width
+# --window=-4 or -z-4: Change the default scrolling size to 4 lines fewer than the current screen size, so always keep 4 lines overlapping with previous screen when scrolling with the space key.
+export LESS='--ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=2 --window=-4'
+
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
