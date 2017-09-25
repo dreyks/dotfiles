@@ -1,6 +1,6 @@
 [alias]
   # list all aliases
-  aliases = config --get-regexp alias
+  aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
 
   # add
   a = add                           # add
@@ -11,7 +11,7 @@
 
   # branch
   b = branch -v                     # branch (verbose)
-  prune-gone = !git b -vv | grep gone | awk '{print $1}' | xargs git b -d # remove local orphan branches
+  prune-gone = !git b -vv | grep gone | awk '{print $1}' | xargs -r git b -d # remove local orphan branches
 
   # commit
   c = commit -m                     # commit with message
@@ -25,7 +25,7 @@
   cop = !sh -c 'git branch -a | grep -v remotes | grep $1 | xargs git checkout' - # changes local branches on partial branch name match
 
   # cherry-pick
-  cp = cherry-pick -x               # grab a change from a branch
+  cp = cherry-pick                  # grab a change from a branch
 
   # diff
   d = diff                          # diff unstaged changes
@@ -46,6 +46,13 @@
 
   # push
   ps = push                         # push
+  psf = push --force-with-lease
+  psn = push -u origin HEAD         # push current branch to origin and set it as an upstream
+
+  # rebase
+  rb = rebase                       # rebase
+  rbi = rebase -i --committer-date-is-author-date  # start interactive rebase, do not change the commit date
+  rbc = rebase --continue           # continue interactive rebase
 
   # remote
   r = remote -v                     # show remotes (verbose)
