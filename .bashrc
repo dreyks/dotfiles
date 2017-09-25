@@ -8,8 +8,6 @@ case $- in
       *) return;;
 esac
 
-platform="$(uname | tr '[:upper:]' '[:lower:]')"
-
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -116,25 +114,23 @@ PROMPT_COMMAND=bash_prompt
 stty stop undef
 stty start undef
 
-# enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
 fi
+
+alias grep='grep --color=auto'
+
 # -a do not ignore entries starting with .
 # -h print human readable sizes
 # -F append indicator (one of */=>@|) to entries
-# -f do not sort: needed for MacOS to sort case-insensitively, turns off -ls for *nix so use it only for darwin platform
+# -f do not sort: needed for MacOS to sort case-insensitively, turns off -ls for GNU ls so use it only for BSD platform
 # -l use a long listing format
 ll_keys='lahF'
-if [[ $platform == 'darwin' ]]; then
+if ! strings `which ls` | grep -q 'GNU coreutils'; then
+  alias ls='ls --color=auto'
+else
   ll_keys+='f' 
+  export CLICOLOR=1
 fi
 alias ll="ls -$ll_keys"
 
@@ -164,6 +160,10 @@ if ! shopt -oq posix; then
     fi
   fi
 fi
+
+# do not expand ~ on tab completions
+_expand() { :; }
+__expand_tilde_by_ref() { :; }
 
 export LANG="en_US.UTF-8"
 export EDITOR='vim'
