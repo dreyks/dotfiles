@@ -24,8 +24,14 @@ if [[ -z $TMUX ]]; then
   if [ -d "$HOME/.rvm/bin" ] ; then
     export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
   fi
+
+  if [ -d "/usr/local/opt/coreutils/libexec" ] ; then
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+  fi
 fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 [ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh" --no-use  # This loads nvm
+
