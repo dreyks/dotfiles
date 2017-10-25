@@ -126,7 +126,7 @@ alias grep='grep --color=auto'
 # -f do not sort: needed for MacOS to sort case-insensitively, turns off -ls for GNU ls so use it only for BSD platform
 # -l use a long listing format
 ll_keys='lahF'
-if ! strings `which ls` | grep -q 'GNU coreutils'; then
+if strings `which ls` | grep -q 'GNU coreutils'; then
   alias ls='ls --color=auto'
 else
   ll_keys+='f' 
