@@ -22,7 +22,7 @@
   # checkout
   co = checkout                     # checkout
   nb = checkout -b                  # create and switch to a new branch (mnemonic: "git new branch branchname...")
-  cop = !sh -c 'git branch -a | grep -v remotes | grep $1 | xargs git checkout' - # changes local branches on partial branch name match
+  cop = !sh -c 'git branch | (which fzf &> /dev/null && fzf || grep $1) | xargs git checkout' - # changes local branches on partial branch name match
 
   # cherry-pick
   cp = cherry-pick                  # grab a change from a branch
