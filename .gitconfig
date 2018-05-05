@@ -4,6 +4,8 @@
 
   # add
   a = add                           # add
+  aa = add .                        # add all
+  au = add -u .                     # only add changed
 
   # via http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
   snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
