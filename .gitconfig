@@ -19,7 +19,9 @@
   c = commit -m                     # commit with message
   ca = commit -am                   # commit all with message
   ci = commit                       # commit
-  amend = commit --amend            # ammend your last commit
+  amende = commit --amend           # ammend your last commit
+  amend = commit --amend --no-edit  # ammend your last commit without editing commit message
+  wip = !git add . && git commit -am 'wip' --no-verify # temporary commit with skipped pre-hooks
 
   # checkout
   co = checkout                     # checkout
