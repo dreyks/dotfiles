@@ -54,8 +54,8 @@
   psn = push -u origin HEAD         # push current branch to origin and set it as an upstream
 
   # rebase
-  rb = rebase                       # rebase
-  rbi = rebase -i --committer-date-is-author-date  # start interactive rebase, do not change the commit date
+  rb = rebase												# rebase
+  rbi = rebase -i										# start interactive rebase
   rbc = rebase --continue           # continue interactive rebase
 
   # remote
