@@ -87,6 +87,9 @@
   # stashes all the changes befoe performing a rebase, then applies
   # it back after rebase is finished
   autostash = true
+  # during an interactive rebase moves commits made with --fixup and --squash
+  # to the corresponding targets
+  autosquash = true
 
 [user]
   name = Roman Usherenko
