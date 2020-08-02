@@ -19,9 +19,11 @@
   c = commit -m                     # commit with message
   ca = commit -am                   # commit all with message
   ci = commit                       # commit
-  amende = commit --amend           # ammend your last commit
-  amend = commit --amend --no-edit  # ammend your last commit without editing commit message
+  amende = commit --amend           # amend your last commit
+  amend = commit --amend --no-edit  # amend your last commit without editing commit message
   wip = !git add . && git commit -am 'wip' --no-verify # temporary commit with skipped pre-hooks
+	fixup = commit --fixup            # fixup to a specified commit
+	fixuprb = !sh -c 'git commit --fixup $1 && git rebase -i $1~' - # fixup to a specified commit and immediately rebase
 
   # checkout
   co = checkout                     # checkout
