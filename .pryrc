@@ -1,17 +1,31 @@
-# === EDITOR ===
-# Pry.editor = 'vi'
-
 # == Pry-Nav - Using pry as a debugger ==
 Pry.commands.alias_command 'c', 'continue' rescue nil
 Pry.commands.alias_command 's', 'step' rescue nil
 Pry.commands.alias_command 'n', 'next' rescue nil
 
 # === CUSTOM PROMPT ===
-# This prompt shows the ruby version (useful for RVM)
-Pry.config.prompt = [
-  proc { |obj, nesting, pry| "#{pry.config.prompt_name}@#{RUBY_VERSION}(#{Pry.view_clip(obj)})#{":#{nesting}" unless nesting.zero?}> " },
-  proc { |obj, nesting, pry| "#{pry.config.prompt_name}@#{RUBY_VERSION}(#{Pry.view_clip(obj)})#{":#{nesting}" unless nesting.zero?}* " },
-]
+# This prompt shows the ruby version
+if defined?(Pry::Prompt) # Pry >= 0.13.0
+  Pry::Prompt.add(
+    :rb_version,
+    'ruby version prompt',
+  ) do |context, nesting, pry, separator|
+    format(
+      '%<name>s@%<version>s(%<context>s)%<nesting>s%<separator>s ',
+      name: pry.config.prompt_name,
+      version: RUBY_VERSION,
+      context: Pry.view_clip(context),
+      nesting: (nesting > 0 ? ":#{nesting}" : ''),
+      separator: separator
+    )
+  end
+  Pry.config.prompt = Pry::Prompt[:rb_version]
+else
+  Pry.config.prompt = [
+    proc { |obj, nesting, pry| "#{pry.config.prompt_name}@#{RUBY_VERSION}(#{Pry.view_clip(obj)})#{":#{nesting}" unless nesting.zero?}> " },
+    proc { |obj, nesting, pry| "#{pry.config.prompt_name}@#{RUBY_VERSION}(#{Pry.view_clip(obj)})#{":#{nesting}" unless nesting.zero?}* " },
+  ]
+end
 
 # === Listing config ===
 # Better colors - by default the headings for methods are too 
