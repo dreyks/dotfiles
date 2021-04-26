@@ -155,8 +155,8 @@ if ! shopt -oq posix; then
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   elif which brew > /dev/null; then
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-      . $(brew --prefix)/etc/bash_completion
+    if [ -f $(brew --prefix)/etc/profile.d/bash_completion.sh ]; then
+      . $(brew --prefix)/etc/profile.d/bash_completion.sh
     fi
   fi
 fi
