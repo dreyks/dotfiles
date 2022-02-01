@@ -22,8 +22,8 @@
   amende = commit --amend           # amend your last commit
   amend = commit --amend --no-edit  # amend your last commit without editing commit message
   wip = !git add . && git commit -am 'wip' --no-verify # temporary commit with skipped pre-hooks
-	fix = commit --fixup              # fixup to a specified commit
-	fixr = !sh -c 'sha=$(git rev-parse $1) && git commit --fixup $sha && git rebase -i $sha~' - # fixup to a specified commit and immediately rebase
+  fix = commit --fixup              # fixup to a specified commit
+  fixr = !sh -c 'sha=$(git rev-parse $1) && git commit --fixup $sha && git rebase -i $sha~' - # fixup to a specified commit and immediately rebase
 
   # checkout
   co = checkout                     # checkout
@@ -81,7 +81,7 @@
   algorithm = patience
 
 [init]
-	defaultBranch = master
+  defaultBranch = master
 
 [push]
   # 'git push' will push the current branch to its tracking branch
@@ -89,7 +89,7 @@
   default = upstream
 
 [rebase]
-  # stashes all the changes befoe performing a rebase, then applies
+  # stashes all the changes before performing a rebase, then applies
   # it back after rebase is finished
   autostash = true
   # during an interactive rebase moves commits made with --fixup and --squash
