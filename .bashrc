@@ -35,7 +35,7 @@ shopt -s globstar
 # --LONG-PROMPT or -M: Prompt more verbosely.
 # --RAW-CONTROL-CHARS or -R: Cause ANSI “color” escape sequences to be displayed in their raw form. This is for the color display explained later in the next section.
 # --HILITE-UNREAD or -W: Highlight the first unread line after scrolling the screen for more than one lines.
-# --tabs=2 or -x4: Display a tab as 2-character width
+# --tabs=2 or -x2: Display a tab as 2-character width
 # --window=-4 or -z-4: Change the default scrolling size to 4 lines fewer than the current screen size, so always keep 4 lines overlapping with previous screen when scrolling with the space key.
 export LESS='--ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=2 --window=-4'
 
@@ -114,7 +114,7 @@ PROMPT_COMMAND=bash_prompt
 stty stop undef
 stty start undef
 
-if [ -x /usr/bin/dircolors ]; then
+if [ -x $(command -v dircolors) ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
@@ -125,26 +125,14 @@ alias grep='grep --color=auto'
 # -F append indicator (one of */=>@|) to entries
 # -f do not sort: needed for MacOS to sort case-insensitively, turns off -ls for GNU ls so use it only for BSD platform
 # -l use a long listing format
+# -G BSD option to colorize output
 ll_keys='lahF'
 if strings `which ls` | grep -q 'GNU coreutils'; then
   alias ls='ls --color=auto'
 else
-  ll_keys+='f' 
-  export CLICOLOR=1
+  ll_keys+='fG'
 fi
 alias ll="ls -$ll_keys"
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile

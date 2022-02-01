@@ -1,6 +1,4 @@
+export BASH_SILENCE_DEPRECATION_WARNING=1 # MacOS bash -> zsh warning
+
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
-
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
-. /usr/local/opt/asdf/asdf.sh
-
+[[ -s "$HOME/.bashrc"  ]] && source "$HOME/.bashrc" # load non-login shell config

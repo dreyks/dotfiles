@@ -8,46 +8,31 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-if [[ -z $TMUX ]]; then
-  if [ -d "$HOME/.local/bin" ] ; then
+if [ -d "$HOME/.local/bin" ] ; then
     export PATH="$HOME/.local/bin:$PATH"
-  fi
-
-  # if [ -d "$HOME/.rvm/bin" ] ; then
-  #   export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-  # fi
-
-  if [ -d "/usr/local/opt/coreutils/libexec" ] ; then
-    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-  fi
-
-  if [ -d "/usr/local/opt/grep/libexec/gnubin" ] ; then
-    export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
-    export MANPATH="/usr/local/opt/grep/libexec/gnuman:$MANPATH"
-  fi
-  
-  if [ -d "/usr/local/opt/gnu-time/libexec/gnubin" ] ; then
-    export PATH="/usr/local/opt/gnu-time/libexec/gnubin:$PATH"
-    export MANPATH="/usr/local/opt/gnu-time/libexec/gnuman:$MANPATH"
-  fi
 fi
 
-# RVM
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# Setup homebrew
+if [ -d /opt/homebrew ] ; then # Apple Silicon
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
-# NVM
-# [ -s "$HOME/.nvm/nvm.sh" ] && source "$HOME/.nvm/nvm.sh"  # This loads nvm
-# [ -s "$HOME/.nvm/bash_completion" ] && source "$HOME/.nvm/bash_completion"  # This loads nvm bash_completion
+# Setup homebrew binaries
+if [ -x "$(command -v brew)" ] ; then
+    prefix=$(brew --prefix)
 
-# AVN
-# [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
+    if [ -d "$prefix/opt/coreutils/libexec" ] ; then
+        export PATH="$prefix/opt/coreutils/libexec/gnubin:$PATH"
+        export MANPATH="$prefix/opt/coreutils/libexec/gnuman:$MANPATH"
+    fi
 
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-    	. "$HOME/.bashrc"
+    if [ -d "$prefix/opt/grep/libexec/gnubin" ] ; then
+        export PATH="$prefix/opt/grep/libexec/gnubin:$PATH"
+        export MANPATH="$prefix/opt/grep/libexec/gnuman:$MANPATH"
+    fi
+
+    if [ -d "$prefix/opt/gnu-time/libexec/gnubin" ] ; then
+        export PATH="$prefix/opt/gnu-time/libexec/gnubin:$PATH"
+        export MANPATH="$prefix/opt/gnu-time/libexec/gnuman:$MANPATH"
     fi
 fi
-
