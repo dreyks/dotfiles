@@ -1,3 +1,6 @@
+[advice]
+  # do not inform about commits skipped during an interactive rebase
+  skippedCherryPicks = false
 [alias]
   # list all aliases
   aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
@@ -66,6 +69,10 @@
   # status
   s = status -s                     # status
 
+[branch]
+  # sort branches by last commit date
+  sort = -committerdate
+
 [core]
   excludesfile = ~/.gitignore
   editor = vi
@@ -84,6 +91,8 @@
   defaultBranch = master
 
 [push]
+  # 'git push' assumes --set-upstream
+  autoSetupRemote = true
   # 'git push' will push the current branch to its tracking branch
   # the usual default is to push all branches
   default = upstream
