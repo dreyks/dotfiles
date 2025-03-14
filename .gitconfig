@@ -45,6 +45,7 @@
 
   # log
   l = log --graph --abbrev-commit
+  lgrep = l --grep
   changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
   short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
   simple = log --pretty=format:\" * %s\"
