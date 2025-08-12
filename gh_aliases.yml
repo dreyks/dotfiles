@@ -1,0 +1,2 @@
+co: pr checkout
+prv: pr view -w
