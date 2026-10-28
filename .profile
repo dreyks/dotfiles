@@ -8,6 +8,8 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+export LANG="en_US.UTF-8"
+
 if [ -d "$HOME/.local/bin" ] ; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
@@ -34,5 +36,10 @@ if [ -x "$(command -v brew)" ] ; then
     if [ -d "$prefix/opt/gnu-time/libexec/gnubin" ] ; then
         export PATH="$prefix/opt/gnu-time/libexec/gnubin:$PATH"
         export MANPATH="$prefix/opt/gnu-time/libexec/gnuman:$MANPATH"
+    fi
+
+    if [ -r "$prefix/etc/profile.d/bash_completion.sh" ]; then
+      export BASH_COMPLETION_COMPAT_DIR="$prefix/etc/bash_completion.d"
+      . "$prefix/etc/profile.d/bash_completion.sh"
     fi
 fi

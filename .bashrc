@@ -153,5 +153,4 @@ fi
 _expand() { :; }
 __expand_tilde_by_ref() { :; }
 
-export LANG="en_US.UTF-8"
 export EDITOR='vim'
